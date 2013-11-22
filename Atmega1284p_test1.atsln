@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Atmega1284p_test1", "Atmega1284p_test1\Atmega1284p_test1.cproj", "{CEAEB4B7-A3F9-472D-9CE1-3F813F50D78F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEAEB4B7-A3F9-472D-9CE1-3F813F50D78F}.Debug|AVR.ActiveCfg = Debug|AVR
+		{CEAEB4B7-A3F9-472D-9CE1-3F813F50D78F}.Debug|AVR.Build.0 = Debug|AVR
+		{CEAEB4B7-A3F9-472D-9CE1-3F813F50D78F}.Release|AVR.ActiveCfg = Release|AVR
+		{CEAEB4B7-A3F9-472D-9CE1-3F813F50D78F}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
