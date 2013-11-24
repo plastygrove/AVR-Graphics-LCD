@@ -191,7 +191,7 @@ void print_string2(int x, int y, char* str) {
 	while (*(str) != '\0') {
 		if(y>=127){
 			y=0;
-			x+=1;	
+			x+=1;
 		}
 		write_char2(x, y, *(str));
 		y+=8;
@@ -334,7 +334,7 @@ void do_raw_test(){
 }
 
 void show_message(int cursor_x, int cursor_y, char str[]){
-	//print_string(&cursor_x,&cursor_y, str);	
+	//print_string(&cursor_x,&cursor_y, str);
 	print_string2(cursor_x,cursor_y, str);
 }
 

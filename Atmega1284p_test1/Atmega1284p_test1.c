@@ -61,6 +61,82 @@ void get_time_string(char *str){
 	
 }
 
+void get_date_string(char *str){
+	
+	char buffer[20];
+	byte month = 0, days=0, year=0;
+	get_date(&month, &days, &year);
+	
+	month = bcd_decode(month);
+	days = bcd_decode(days);
+	year = bcd_decode(year);
+	if(days<10){
+		itoa(0, str, 10);
+		itoa(days,buffer,10);
+		strcat(str, buffer);
+		} else {
+		itoa(days,str,10);
+		//strcat(str, buffer);
+	}
+	strcat(str, " ");
+	switch(month){
+		case 1:
+		strcat(str, "Jan");
+		break;
+		case 2:
+		strcat(str, "Feb");
+		break;
+		case 3:
+		strcat(str, "Mar");
+		break;
+		case 4:
+		strcat(str, "Apr");
+		break;
+		case 5:
+		strcat(str, "May");
+		break;
+		case 6:
+		strcat(str, "Jun");
+		break;
+		case 7:
+		strcat(str, "Jul");
+		break;
+		case 8:
+		strcat(str, "Aug");
+		break;
+		case 9:
+		strcat(str, "Sep");
+		break;
+		case 10:
+		strcat(str, "Oct");
+		break;
+		case 11:
+		strcat(str, "Nov");
+		break;
+		case 12:
+		strcat(str, "Dec");
+		break;
+		default:
+		strcat(str, "Eh?");
+		break;
+	}
+	//if(min<10){
+	//strcat(str, "0");
+	//itoa(min, buffer,10);
+	//strcat(str, buffer);
+	//} else {
+	//itoa(min,buffer,10);
+	//strcat(str, buffer);
+	//}
+	
+	strcat(str, " 20");
+	itoa(year,buffer,10);
+	strcat(str, buffer);
+
+	
+	
+}
+
 
 volatile unsigned int interrupt_counter=0;
 volatile byte star_ypos = 0;
@@ -89,7 +165,10 @@ void init(){
 	sei();
 }
 
+volatile int star_ypos_local = 0;
+
 ISR (PCINT1_vect) {
+	
 	cli();
 	interrupt_counter++;
 	if(interrupt_counter >= 5000){
@@ -112,29 +191,30 @@ ISR (PCINT1_vect) {
 		if(star_ypos <= 4)
 		star_dir = 0;
 	}
-	
+	show_message(0, 128-star_ypos_local, " ");
+	show_message(7, star_ypos_local, " ");
+	star_ypos_local = star_ypos;
+	show_message(0, 128-star_ypos_local, "*");
+	show_message(7, star_ypos_local, "*");
 	sei();
 }
 
 
 int main(){
-	int star_ypos_local = 0, pic_counter=0;
+	int pic_counter=0;
 	char time_str[16];
-	
+	char date_str[16];
+	//set_time_date();
 	init();
 	
 	while(1){
-		show_message(0, 128-star_ypos_local, " ");
-		show_message(7, star_ypos_local, " ");
+
 		
 		star_ypos_local = star_ypos;
 		get_time_string(time_str);
-		show_message(3, 32, time_str);
+		get_date_string(date_str);
 		
-		show_message(0, 128-star_ypos_local, "*");
-		show_message(7, star_ypos_local, "*");
-		
-		wait(50);
+		//wait(50);
 		if(show_pic){
 			if(pic_counter == 0){
 				draw_picture(bart);
@@ -152,6 +232,11 @@ int main(){
 			wait(5000);
 			glcd_clear();
 			show_pic = 0;
+			} else {
+			cli();
+			show_message(2, 34, time_str);
+			show_message(4, 18, date_str);
+			sei();
 		}
 		
 	}

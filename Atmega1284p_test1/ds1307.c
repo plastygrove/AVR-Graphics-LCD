@@ -112,10 +112,10 @@ void get_date(byte *months, byte *days, byte *years){ // returns months, days, a
 void set_time_date() // simple, hard - coded way to set the date 8/13/21013 at 8:51 PM
 {
 	I2C_write_register(MONTHS_REGISTER,0x0B);
-	I2C_write_register(DAYS_REGISTER,0x21);
-	I2C_write_register(YEARS_REGISTER, 0x10);
-	I2C_write_register(HOURS_REGISTER, 0x08); // add 0x40 for PM
-	I2C_write_register(MINUTES_REGISTER, 0x27);
+	I2C_write_register(DAYS_REGISTER,0x22);
+	I2C_write_register(YEARS_REGISTER, 0x13);
+	I2C_write_register(HOURS_REGISTER, 0x09); // add 0x40 for PM
+	I2C_write_register(MINUTES_REGISTER, 0x26);
 	I2C_write_register(SECONDS_REGISTER, 0x00);
 }
 
